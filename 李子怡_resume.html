@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李子怡 · AI产品求职简历</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+SC:wght@300;400;600;700&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --beige: #F5F0E8;
+    --beige-dark: #EDE6D6;
+    --beige-mid: #E8DFC8;
+    --cream: #FAF7F2;
+    --sand: #D4C5A9;
+    --brown: #8B6E4E;
+    --brown-dark: #5C4A32;
+    --brown-light: #B8956A;
+    --charcoal: #2C2416;
+    --ink: #3D2E1A;
+    --gold: #C4973A;
+    --gold-light: #E8C472;
+    --accent: #7A5C3A;
+    --muted: #9A8870;
+    --white: #FEFCF8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--beige);
+    color: var(--ink);
+    font-family: 'Noto Serif SC', serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--beige-dark); }
+  ::-webkit-scrollbar-thumb { background: var(--brown-light); border-radius: 3px; }
+
+  /* ── PROGRESS BAR ── */
+  #progress-bar {
+    position: fixed; top: 0; left: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--brown-light));
+    width: 0%; z-index: 9999;
+    transition: width 0.1s linear;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(245, 240, 232, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(196, 151, 58, 0.18);
+    transition: all 0.3s ease;
+  }
+  nav.scrolled {
+    padding: 12px 48px;
+    box-shadow: 0 4px 24px rgba(92, 74, 50, 0.1);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--brown-dark);
+    letter-spacing: 0.05em;
+    font-style: italic;
+  }
+  .nav-links {
+    display: flex; gap: 36px; list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.12em;
+    font-family: 'DM Mono', monospace;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--brown); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 48px 80px;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(196, 151, 58, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 20% 70%, rgba(139, 110, 78, 0.06) 0%, transparent 60%);
+  }
+
+  /* Decorative lines */
+  .hero-lines {
+    position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+  }
+  .hero-lines::before {
+    content: '';
+    position: absolute; top: 15%; right: 8%;
+    width: 1px; height: 65%;
+    background: linear-gradient(to bottom, transparent, rgba(196,151,58,0.3), transparent);
+    animation: lineReveal 1.5s ease 0.5s both;
+  }
+  .hero-lines::after {
+    content: '';
+    position: absolute; bottom: 18%; left: 6%;
+    width: 40%; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(196,151,58,0.25), transparent);
+    animation: lineRevealH 1.5s ease 0.8s both;
+  }
+  @keyframes lineReveal { from { transform: scaleY(0); opacity:0; } to { transform: scaleY(1); opacity:1; } }
+  @keyframes lineRevealH { from { transform: scaleX(0); opacity:0; } to { transform: scaleX(1); opacity:1; } }
+
+  .hero-inner {
+    max-width: 900px; width: 100%;
+    position: relative; z-index: 1;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(56px, 8vw, 96px);
+    font-weight: 700;
+    color: var(--charcoal);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.35s both;
+  }
+  .hero-name .cn { display: block; }
+  .hero-name .en {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.48em;
+    color: var(--brown-light);
+    letter-spacing: 0.05em;
+    margin-top: 6px;
+  }
+
+  .hero-divider {
+    width: 80px; height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--brown-light));
+    margin: 28px 0;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.5s both;
+  }
+
+  .hero-intent {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--brown-dark);
+    margin-bottom: 14px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s both;
+  }
+
+  .hero-tags {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.75s both;
+  }
+  .tag {
+    padding: 6px 16px;
+    background: rgba(196, 151, 58, 0.1);
+    border: 1px solid rgba(196, 151, 58, 0.3);
+    border-radius: 2px;
+    font-size: 12px;
+    color: var(--brown);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.08em;
+    transition: all 0.2s;
+  }
+  .tag:hover {
+    background: rgba(196, 151, 58, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .hero-contact {
+    display: flex; flex-wrap: wrap; gap: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.9s both;
+  }
+  .contact-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--muted);
+    font-family: 'DM Mono', monospace;
+  }
+  .contact-item .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .hero-scroll {
+    position: absolute; bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.2s both;
+  }
+  .hero-scroll span {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTIONS COMMON ── */
+  section {
+    padding: 100px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex; align-items: baseline; gap: 20px;
+    margin-bottom: 60px;
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--charcoal);
+    font-style: italic;
+  }
+  .section-line {
+    flex: 1; height: 1px;
+    background: linear-gradient(to right, rgba(196,151,58,0.3), transparent);
+  }
+
+  /* ── EDUCATION ── */
+  #education { background: var(--white); border-radius: 0; }
+
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+  .edu-card {
+    background: var(--beige);
+    border: 1px solid var(--sand);
+    border-radius: 4px;
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  .edu-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(92, 74, 50, 0.12);
+  }
+  .edu-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(to bottom, var(--gold), var(--brown-light));
+  }
+  .edu-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    margin-bottom: 10px;
+  }
+  .edu-school {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--brown-dark);
+    margin-bottom: 4px;
+  }
+  .edu-degree {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+  .edu-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 12px;
+    background: rgba(196,151,58,0.12);
+    border-radius: 2px;
+    font-size: 12px;
+    color: var(--brown);
+    margin-bottom: 16px;
+  }
+  .edu-detail {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .edu-detail strong { color: var(--brown); }
+
+  /* ── EXPERIENCE ── */
+  #experience { position: relative; }
+
+  .exp-timeline { position: relative; }
+  .exp-timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 24px; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), var(--sand), transparent);
+  }
+
+  .exp-item {
+    padding-left: 44px;
+    margin-bottom: 64px;
+    position: relative;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .exp-item.visible { opacity: 1; transform: translateX(0); }
+
+  .exp-dot {
+    position: absolute; left: -6px; top: 4px;
+    width: 13px; height: 13px; border-radius: 50%;
+    background: var(--gold);
+    border: 3px solid var(--beige);
+    box-shadow: 0 0 0 1px var(--gold);
+  }
+
+  .exp-meta {
+    display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .exp-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+  }
+  .exp-company {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--brown-dark);
+  }
+  .exp-role {
+    font-size: 13px;
+    color: var(--brown-light);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.08em;
+  }
+
+  .exp-bullets {
+    margin-top: 18px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+
+  .bullet-item {
+    display: flex; gap: 14px;
+    background: var(--white);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 16px 20px;
+    transition: all 0.25s ease;
+    cursor: default;
+  }
+  .bullet-item:hover {
+    border-color: rgba(196,151,58,0.25);
+    background: rgba(250,247,242,0.8);
+    transform: translateX(6px);
+    box-shadow: 4px 0 0 0 var(--gold) inset;
+  }
+  .bullet-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .bullet-content {}
+  .bullet-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--brown-dark);
+    margin-bottom: 5px;
+  }
+  .bullet-text {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+  .highlight {
+    background: rgba(196,151,58,0.15);
+    color: var(--brown);
+    padding: 1px 5px;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+
+  /* ── RESEARCH ── */
+  #research { background: var(--white); }
+
+  .research-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+
+  .research-card {
+    display: grid; grid-template-columns: 140px 1fr;
+    gap: 0;
+    background: var(--beige);
+    border: 1px solid var(--sand);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
+  }
+  .research-card.visible { opacity: 1; transform: translateY(0); }
+  .research-card:hover {
+    box-shadow: 0 12px 40px rgba(92,74,50,0.1);
+  }
+
+  .research-year {
+    background: linear-gradient(135deg, var(--brown-dark), var(--accent));
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 24px 16px;
+    color: var(--gold-light);
+    font-family: 'DM Mono', monospace;
+    text-align: center;
+  }
+  .research-year .year-num { font-size: 28px; font-weight: 400; line-height: 1; }
+  .research-year .year-label { font-size: 9px; letter-spacing: 0.2em; margin-top: 6px; opacity: 0.7; }
+
+  .research-body { padding: 24px 28px; }
+  .research-conf {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .conf-badge {
+    background: rgba(196,151,58,0.15);
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-size: 10px;
+    color: var(--brown);
+  }
+  .research-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--brown-dark);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .research-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  /* ── SKILLS ── */
+  #skills { position: relative; }
+
+  .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+
+  .skill-group { }
+  .skill-group-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(196,151,58,0.2);
+  }
+
+  .skill-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(212,197,169,0.3);
+  }
+  .skill-name { font-size: 14px; color: var(--ink); }
+  .skill-bar-wrap {
+    width: 100px; height: 3px;
+    background: var(--sand);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .skill-bar {
+    height: 100%; border-radius: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--brown-light));
+    width: 0%;
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .skill-tags-grid {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px;
+  }
+  .skill-tag {
+    padding: 7px 14px;
+    border: 1px solid var(--sand);
+    border-radius: 3px;
+    font-size: 12px;
+    color: var(--brown);
+    background: var(--white);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.06em;
+    transition: all 0.2s;
+  }
+  .skill-tag:hover {
+    background: var(--brown-dark);
+    color: var(--gold-light);
+    border-color: var(--brown-dark);
+    transform: translateY(-2px);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--brown-dark);
+    color: var(--beige-mid);
+    padding: 60px 48px;
+    text-align: center;
+  }
+  .footer-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-style: italic;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+  }
+  .footer-contact {
+    display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .footer-contact-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: rgba(232,223,200,0.7);
+    letter-spacing: 0.1em;
+  }
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(232,223,200,0.35);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.15em;
+  }
+
+  /* ── REVEAL ANIMATIONS ── */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 14px 24px; }
+    .nav-links { gap: 18px; }
+    section { padding: 70px 24px; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .research-card { grid-template-columns: 100px 1fr; }
+    .skills-layout { grid-template-columns: 1fr; gap: 36px; }
+    #hero { padding: 100px 24px 80px; }
+  }
+
+  /* ── CURSOR GLOW ── */
+  .cursor-glow {
+    position: fixed;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,151,58,0.04) 0%, transparent 70%);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    transition: left 0.3s ease, top 0.3s ease;
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">李子怡</div>
+  <ul class="nav-links">
+    <li><a href="#hero">首页</a></li>
+    <li><a href="#education">教育</a></li>
+    <li><a href="#experience">经历</a></li>
+    <li><a href="#research">研究</a></li>
+    <li><a href="#skills">技能</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="max-width:100%; padding-left:10%; padding-right:10%;">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">CURRICULUM VITAE · 2026</p>
+    <h1 class="hero-name">
+      <span class="cn">李子怡</span>
+      <span class="en">Lee Zi Yi</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-intent">AI产品经理 · 内容策略 · 人机传播研究者</p>
+    <div class="hero-tags">
+      <span class="tag">Prompt Engineering</span>
+      <span class="tag">AI Agent 搭建</span>
+      <span class="tag">内容增长策略</span>
+      <span class="tag">数据洞察</span>
+      <span class="tag">用户研究</span>
+      <span class="tag">ICA顶会一作</span>
+      <span class="tag">上海交通大学硕士</span>
+      <span class="tag">马来西亚华裔</span>
+    </div>
+    <div class="hero-contact">
+      <div class="contact-item"><span class="dot"></span><span>(+86) 18658168270</span></div>
+      <div class="contact-item"><span class="dot"></span><span>lizi11@sjtu.edu.cn</span></div>
+      <div class="contact-item"><span class="dot"></span><span>微信：zizi11311</span></div>
+      <div class="contact-item"><span class="dot"></span><span>Base：上海（可调）</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" style="max-width:100%; background:var(--white); padding-left:10%; padding-right:10%;">
+  <div style="max-width:1000px; margin:0 auto;">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">教育背景</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-period">2024.09 — 2027.03</div>
+        <div class="edu-school">上海交通大学</div>
+        <div class="edu-degree">新闻传播学 · 硕士</div>
+        <div class="edu-badge">🏆 GPA 3.81/4 · 前3% · 校奖学金</div>
+        <div class="edu-detail">
+          研究方向：<strong>智能传播、人机传播</strong><br>
+          课程涵盖：人机传播研究、定量与定性研究方法、信息可视化、新媒体用户研究、健康传播、社交媒体研究
+        </div>
+      </div>
+      <div class="edu-card reveal" style="transition-delay:0.15s">
+        <div class="edu-period">2020.09 — 2024.07</div>
+        <div class="edu-school">浙江大学</div>
+        <div class="edu-degree">策略传播学 · 学士</div>
+        <div class="edu-badge">🏆 GPA 3.75/4 · 前5% · 国际荣誉称号</div>
+        <div class="edu-detail">
+          荣获<strong>浙江大学来华留学奖学金</strong>（2020–2024）<br>
+          核心课程：传播心理学、广告策略与创意、品牌传播学、公共关系学
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="max-width:100%; padding-left:10%; padding-right:10%;">
+  <div style="max-width:1000px; margin:0 auto;">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">实习经历</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="exp-timeline">
+
+      <!-- Xiaohongshu -->
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-meta">
+          <span class="exp-period">2025.11 — 至今</span>
+          <span class="exp-company">小红书（行吟信息科技）</span>
+          <span class="exp-role">商业化渠道部 / AI内容与广告策略</span>
+        </div>
+        <div class="exp-bullets">
+          <div class="bullet-item">
+            <span class="bullet-icon">🤖</span>
+            <div class="bullet-content">
+              <div class="bullet-title">从0-1 — AI赋能内容策略</div>
+              <div class="bullet-text">
+                运用内部数据Agent截取赛道趋势，通过 <span class="highlight">Prompt Engineering</span> 从0-1设计全套workflow，引导LLM输出"人群×场景"内容策略矩阵及种草策略报告。成功协助客户拿下 <span class="highlight">500w比稿</span>，为成熟期品牌挖掘新潜力人群，助力中小代理迅速增长。
+              </div>
+            </div>
+          </div>
+          <div class="bullet-item">
+            <span class="bullet-icon">🔄</span>
+            <div class="bullet-content">
+              <div class="bullet-title">从1-10 — 数据产品共创</div>
+              <div class="bullet-text">
+                透过AI内容陪跑抓取代理/客户反馈痛点，与数据平台展开长期共创，每周为产品团队提供复盘结果与可优化需求（评论语义聚类、水军过滤、笔记结构细分等），推动 <span class="highlight">数据洞察—用户需求—产品迭代</span> 完整闭环。
+              </div>
+            </div>
+          </div>
+          <div class="bullet-item">
+            <span class="bullet-icon">📊</span>
+            <div class="bullet-content">
+              <div class="bullet-title">广告投放增长分析</div>
+              <div class="bullet-text">
+                搭建互联网头客代理投放指标监测体系，追踪 <span class="highlight">日耗、在投数、ARPA、CTR</span> 等核心指标；结合搜索数据（买词量、用户拓词路径）分析关键词趋势，输出KOS/KOC内容方向。
+              </div>
+            </div>
+          </div>
+          <div class="bullet-item">
+            <span class="bullet-icon">⚙️</span>
+            <div class="bullet-content">
+              <div class="bullet-title">行业Agent & 知识库搭建</div>
+              <div class="bullet-text">
+                协助搭建渠道内部AI Agent与行业知识库，通过 <span class="highlight">RAG架构</span> 整合广告政策与行业知识，实现广告策略信息的智能检索与问答。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mistine -->
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-meta">
+          <span class="exp-period">2023.08 — 2023.11</span>
+          <span class="exp-company">Mistine · 杭州盛夏天</span>
+          <span class="exp-role">市场部 / 品牌数字营销</span>
+        </div>
+        <div class="exp-bullets">
+          <div class="bullet-item">
+            <span class="bullet-icon">🔍</span>
+            <div class="bullet-content">
+              <div class="bullet-title">搜索与用户洞察</div>
+              <div class="bullet-text">
+                通过舆情监测提炼用户核心痛点，结合竞品分析识别高频关键词趋势，提升防晒SPU在平台 <span class="highlight">搜索首屏曝光</span>，为SEO内容布局与SEM投放策略提供数据参考。
+              </div>
+            </div>
+          </div>
+          <div class="bullet-item">
+            <span class="bullet-icon">🚀</span>
+            <div class="bullet-content">
+              <div class="bullet-title">用户增长实践</div>
+              <div class="bullet-text">
+                参与策划 <span class="highlight">Mistine × 李佳琦《所有女生的Offer3》</span>、《BKPP × Mistine35周年庆·上海首站》等公关活动，精准结合产品卖点与防晒品类热点趋势，借力驱动用户增长与品牌曝光。
+              </div>
+            </div>
+          </div>
+          <div class="bullet-item">
+            <span class="bullet-icon">🛡️</span>
+            <div class="bullet-content">
+              <div class="bullet-title">危机公关与反向产品驱动</div>
+              <div class="bullet-text">
+                在"蜜丝婷×陈子壹"危机事件中，围绕"产品功效—用户感知—舆情反馈"反向链路，快速定位功效质疑点并以用户数据校验，<span class="highlight">12小时内</span>完成止血与社群稳定，并向产品部反馈结论。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SJTU Media -->
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-meta">
+          <span class="exp-period">2025.01 — 至今</span>
+          <span class="exp-company">上海交通大学研究生教育公众号</span>
+          <span class="exp-role">主编</span>
+        </div>
+        <div class="exp-bullets">
+          <div class="bullet-item">
+            <span class="bullet-icon">✍️</span>
+            <div class="bullet-content">
+              <div class="bullet-title">社群运营与内容策划</div>
+              <div class="bullet-text">
+                主导从选题策划到发布复盘的完整内容流程；基于阅读率、点赞数、分享率数据迭代内容策略，任期内公众号获评 <span class="highlight">「十佳公众号」</span>，最高推文转发量达 <span class="highlight">1w+</span>。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research" style="max-width:100%; background:var(--white); padding-left:10%; padding-right:10%;">
+  <div style="max-width:1000px; margin:0 auto;">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">学术成果</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="research-grid">
+
+      <div class="research-card">
+        <div class="research-year">
+          <div class="year-num">2026</div>
+          <div class="year-label">ICA · SOUTH AFRICA</div>
+        </div>
+        <div class="research-body">
+          <div class="research-conf">
+            第76届国际传播学大会 (ICA)
+            <span class="conf-badge">第一作者 + 第二作者</span>
+          </div>
+          <div class="research-title">人机关系 × 情感商业化研究（双论文录取）</div>
+          <div class="research-desc">
+            两篇论文均获传播学顶会ICA录取。深度体验Replika、猫箱等情感陪伴产品，拆解玩法机制，研究人机关系中成本与收益的权衡，分析用户与AI互动路径及prompt输出方式与后续影响。
+          </div>
+        </div>
+      </div>
+
+      <div class="research-card">
+        <div class="research-year">
+          <div class="year-num">2025</div>
+          <div class="year-label">AEJMC · SAN FRANCISCO</div>
+        </div>
+        <div class="research-body">
+          <div class="research-conf">
+            第108届AEJMC传播学大会
+            <span class="conf-badge">🏅 Top Student Paper · 第一作者</span>
+          </div>
+          <div class="research-title">人工智能语境 × 主观幸福感研究</div>
+          <div class="research-desc">
+            赴美汇报研究成果，透过CiteSpace和VOSviewer聚类核心文献，系统解析AI语境与人类幸福感之间的关系网络与演进路径。
+          </div>
+        </div>
+      </div>
+
+      <div class="research-card">
+        <div class="research-year">
+          <div class="year-num">2025</div>
+          <div class="year-label">CSSCI · 新闻记者</div>
+        </div>
+        <div class="research-body">
+          <div class="research-conf">
+            《新闻记者》CSSCI中文核心期刊
+            <span class="conf-badge">第三作者</span>
+          </div>
+          <div class="research-title">《剥洋葱还是造恋人？——人机互动中的自我表露与亲密关系发展》</div>
+          <div class="research-desc">
+            独立完成20+目标用户深度访谈，通过主题分析与编码提炼用户画像与关系建立机制，与经典人际关系理论（社会渗透理论SPT）展开理论对话。
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="max-width:100%; padding-left:10%; padding-right:10%;">
+  <div style="max-width:1000px; margin:0 auto;">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">技能图谱</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="skills-layout">
+      <div class="skill-group reveal">
+        <div class="skill-group-title">核心能力</div>
+        <div class="skill-item">
+          <span class="skill-name">AI产品 & Prompt Engineering</span>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-width="92"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">内容策略 & 种草增长</span>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-width="90"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">用户研究 & 数据分析</span>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-width="85"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">学术写作 & 定性研究</span>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-width="88"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">广告投放分析</span>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-width="80"></div></div>
+        </div>
+      </div>
+
+      <div class="skill-group reveal" style="transition-delay:0.15s">
+        <div class="skill-group-title">工具 & 技术</div>
+        <div class="skill-tags-grid">
+          <span class="skill-tag">Workflow搭建</span>
+          <span class="skill-tag">RAG架构</span>
+          <span class="skill-tag">Agent搭建</span>
+          <span class="skill-tag">基础SQL</span>
+          <span class="skill-tag">VLOOKUP</span>
+          <span class="skill-tag">CiteSpace</span>
+          <span class="skill-tag">VOSviewer</span>
+          <span class="skill-tag">剪映</span>
+          <span class="skill-tag">即梦AI</span>
+          <span class="skill-tag">PPT设计</span>
+          <span class="skill-tag">舆情监测</span>
+          <span class="skill-tag">社交媒体运营</span>
+        </div>
+
+        <div class="skill-group-title" style="margin-top:32px;">语言能力</div>
+        <div class="skill-item">
+          <span class="skill-name">中文（母语）</span>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-width="100"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">英文（学术 / 工作）</span>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-width="88"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">马来语（日常）</span>
+          <div class="skill-bar-wrap"><div class="skill-bar" data-width="72"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">李子怡 · Lee Zi Yi</div>
+  <div class="footer-contact">
+    <span class="footer-contact-item">📱 (+86) 18658168270</span>
+    <span class="footer-contact-item">📧 lizi11@sjtu.edu.cn</span>
+    <span class="footer-contact-item">💬 微信：zizi11311</span>
+    <span class="footer-contact-item">📍 上海（可调）</span>
+  </div>
+  <div class="footer-copy">AI PRODUCT · CONTENT STRATEGY · HCI RESEARCH · 2026</div>
+</footer>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('progress-bar').style.width = (scrolled / total * 100) + '%';
+  });
+
+  // Nav scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Cursor glow
+  document.addEventListener('mousemove', e => {
+    const g = document.getElementById('cursorGlow');
+    g.style.left = e.clientX + 'px';
+    g.style.top = e.clientY + 'px';
+  });
+
+  // Intersection observer for reveals
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Animate skill bars
+        entry.target.querySelectorAll('.skill-bar').forEach(bar => {
+          setTimeout(() => {
+            bar.style.width = bar.dataset.width + '%';
+          }, 200);
+        });
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal, .exp-item, .research-card').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Also observe skill bars on their own
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.skill-bar').forEach((bar, i) => {
+          setTimeout(() => {
+            bar.style.width = bar.dataset.width + '%';
+          }, i * 120);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.skill-group').forEach(el => skillObserver.observe(el));
+
+  // Smooth nav click
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
